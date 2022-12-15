@@ -1,0 +1,26 @@
+syntax = "proto3";  // https://developers.google.com/protocol-buffers/docs/proto3
+
+option java_package = "cz.cvut.fel.dsv.chat";     // The package you want to use for your generated Java classes.
+option java_outer_classname = "ChatProto";   // The class name for the outermost Java class (and hence the file name) you want to generate.
+
+service Node{
+    rpc ReceiveMessage(ChatRequest) returns (ChatResponse);
+    rpc RegisterUserNode(RegistrationForm) returns (ChatResponse);
+    rpc RouteMessage(ChatRequest) returns (ChatResponse);
+    rpc SendHello(ChatRequest) returns (ChatResponse);
+}
+
+message ChatResponse{
+    bool success = 1;
+}
+
+message RegistrationForm{
+    string name = 1;
+
+}
+
+message ChatRequest{
+    string recipientName = 1;
+    int32 senderId = 2;
+    string content = 3;
+}

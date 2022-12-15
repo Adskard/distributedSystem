@@ -1,0 +1,8 @@
+/home/adskard/dsv_maven/src/main/java/cz/cvut/fel/dsv/chat/Node.java
+/home/adskard/dsv_maven/src/main/java/cz/cvut/fel/dsv/chat/ConsoleInterface.java
+/home/adskard/dsv_maven/target/generated-sources/protobuf/grpc-java/cz/cvut/fel/dsv/chat/NodeGrpc.java
+/home/adskard/dsv_maven/src/main/java/cz/cvut/fel/dsv/chat/MessageHandler.java
+/home/adskard/dsv_maven/src/main/java/cz/cvut/fel/dsv/chat/InvalidAddressException.java
+/home/adskard/dsv_maven/src/main/java/cz/cvut/fel/dsv/chat/Neighborhood.java
+/home/adskard/dsv_maven/src/main/java/cz/cvut/fel/dsv/chat/Address.java
+/home/adskard/dsv_maven/target/generated-sources/protobuf/java/cz/cvut/fel/dsv/chat/ChatProto.java
