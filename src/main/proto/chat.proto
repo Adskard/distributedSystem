@@ -4,24 +4,69 @@ option java_package = "cz.cvut.fel.dsv.chat";     // The package you want to use
 option java_outer_classname = "ChatProto";   // The class name for the outermost Java class (and hence the file name) you want to generate.
 
 service Node{
-    rpc ReceiveMessage(ChatRequest) returns (ChatResponse);
-    rpc RegisterUserNode(RegistrationForm) returns (ChatResponse);
-    rpc RouteMessage(ChatRequest) returns (ChatResponse);
-    rpc SendHello(ChatRequest) returns (ChatResponse);
+    rpc ReceiveMessage(ChatRequest) returns (BoolResponse);
+    rpc RegisterUserNode(RegistrationRequest) returns (BoolResponse);
+    rpc RouteMessage(ChatRequest) returns (BoolResponse);
+    rpc Greet(ChatRequest) returns (BoolResponse);
+
+    //leader election endpoints
+    //Starts election algorithm on given node
+    //address of who started the election
+    rpc StartElection(AddressRequest) returns (BoolResponse);
+    rpc Elect(Vote) returns (BoolResponse);
+    //announces the winner of election
+    rpc LeaderElected(AddressRequest) returns (BoolResponse);
+
+    //Topology
+    rpc AcceptJoin(AddressRequest) returns (Neighborhood);
+    rpc GetNeighborhood(NeighborhoodRequest) returns (Neighborhood);
+    rpc SetNext2(AddressRequest) returns (BoolResponse);
+    rpc SetPrev(AddressRequest) returns (BoolResponse);
+    rpc FixMissingNode(AddressRequest) returns (BoolResponse);
 }
 
-message ChatResponse{
+message Vote{
+    int64 nodeId = 1;
+    int32 phase = 2;
+    int64 time = 3;
+}
+
+message Neighborhood{
+    Address prev = 1;
+    Address next = 2;
+    Address next2 = 3;
+    Address leader = 4;
+}
+
+message NeighborhoodRequest{
+    int64 time = 1;
+}
+
+message BoolResponse{
     bool success = 1;
+    int64 time = 2;
 }
 
-message RegistrationForm{
-    string name = 1;
+message Address{
+    string host = 1;
+    int32  port = 2;
+    int64 nodeId = 3;
+}
 
+message AddressRequest{
+    Address address = 1;
+    int64 time = 2;
+}
+
+message RegistrationRequest{
+    Address nodeAddress = 1;
+    string username = 2;
+    int64 time = 3;
 }
 
 message ChatRequest{
     string recipientName = 1;
-    string senderName = 2;
-    int32 senderId = 3;
-    string content = 4;
+    string sender = 2;
+    string content = 3;
+    int64 time = 4;
 }
